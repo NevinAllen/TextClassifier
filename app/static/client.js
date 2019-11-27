@@ -12,9 +12,9 @@ function analyze() {
   xhr.onload = function(e) {
     if (this.readyState === 4) {
       var response = JSON.parse(e.target.responseText);
-      if (response["result"] == "1") {
+      if (response["result"] == "0") {
         el("result-label").innerHTML = `This text belongs to comp.graphics`;
-      } else if (response["result"] == "7") {
+      } else if (response["result"] == "4") {
         el("result-label").innerHTML = `This text belongs to rec.autos`;
       } else {
         el("result-label").innerHTML = `${response["result"]}`;
