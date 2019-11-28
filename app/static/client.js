@@ -12,10 +12,12 @@ function analyze() {
   xhr.onload = function(e) {
     if (this.readyState === 4) {
       var response = JSON.parse(e.target.responseText);
-      if (response["result"] == "0") {
-        el("result-label").innerHTML = `This text belongs to comp.graphics`;
-      } else if (response["result"] == "4") {
-        el("result-label").innerHTML = `This text belongs to rec.autos`;
+      if (response["result"] == "negative") {
+        el("result-label").innerHTML = `That's not nice.`;
+      } else if (response["result"] == "neutral") {
+        el("result-label").innerHTML = `Okay..`;
+      } else if (response["result"] == "positive") {
+        el("result-label").innerHTML = `Keep it up!`;
       } else {
         el("result-label").innerHTML = `${response["result"]}`;
       }
