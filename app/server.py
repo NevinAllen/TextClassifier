@@ -61,7 +61,14 @@ async def analyze(request):
     req = await request.form()
     input_text= req['input-text']
 
-    prediction = learn.predict(input_text)[0]
+    p = learn.predict(input_text)
+    prediction = p[0]
+    confidence = p[2]
+    
+    print("Negative Level: " + confidence[0])
+    print("Neutral Level: " + confidence[1])
+    print("Positive Level: " + confidence[2])
+
     score=int(prediction)
     total_sum+=score
     num+=1
