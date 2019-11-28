@@ -8,7 +8,8 @@ from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
-
+total_sum=0
+num=0
 export_file_url = 'https://drive.google.com/uc?export=download&id=1ng7FzcGT6cdYti8_ncdCY9pGXxHOSvs2'
 export_file_name = 'text_classifier.pkl'
 
@@ -62,7 +63,10 @@ async def analyze(request):
 
     prediction = learn.predict(input_text)[0]
     return JSONResponse({'result': str(prediction)})
-
+    score=int(prediction)
+    total_sum+=score
+    num+=1
+    average=total_sum/num
 
 if __name__ == '__main__':
     if 'serve' in sys.argv:
