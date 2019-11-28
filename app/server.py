@@ -62,7 +62,7 @@ async def analyze(request):
     input_text= req['input-text']
 
     p = learn.predict(input_text)
-    prediction = p[0]
+    prediction = str(p[0])
     confidence = p[2].tolist()
     
     print("Negative Level: " + str(confidence[0]))
@@ -81,7 +81,7 @@ async def analyze(request):
     num+=1
     average=total_sum/num
     
-    if prediction == "negative":
+    if prediction == 0:
         return JSONResponse({'result': "That's not nice. <br/>Average is " + str(average)})
     else:
         return JSONResponse({'result': prediction})
