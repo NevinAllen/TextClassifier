@@ -58,6 +58,7 @@ async def homepage(request):
 
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
+    global total_sum, num
     req = await request.form()
     input_text= req['input-text']
 
