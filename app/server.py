@@ -63,12 +63,19 @@ async def analyze(request):
 
     p = learn.predict(input_text)
     prediction = p[0]
-    confidence = p[2]
+    confidence = p[2].tolist()
     
-    print("Negative Level: " + confidence[0])
-    print("Neutral Level: " + confidence[1])
-    print("Positive Level: " + confidence[2])
+    print("Negative Level: " + str(confidence[0]))
+    print("Neutral Level: " + str(confidence[1]))
+    print("Positive Level: " + str(confidence[2]))
 
+    if prediction == "negative":
+        prediction = 0
+    elif prediction == "neutral":
+        prediction = 1
+    else:
+        prediction = 2
+        
     score=int(prediction)
     total_sum+=score
     num+=1
