@@ -71,21 +71,23 @@ async def analyze(request):
     print("Positive Level: " + str(confidence[2]))
 
     if prediction == "negative":
-        prediction = 0
-    elif prediction == "neutral":
         prediction = 1
+    elif prediction == "neutral":
+        prediction = 3
     else:
-        prediction = 2
+        prediction = 5
         
     score=int(prediction)
     total_sum+=score
     num+=1
-    average=total_sum/num
+    average= round((total_sum/num),2)
     
-    if prediction == 0:
-        return JSONResponse({'result': "That's not nice. <br/>Average is " + str(average)})
+    if prediction == 1:
+        return JSONResponse({'result': "That's not nice. <br/>Rating: " + str(average)}) 
+    elif prediction == 3:
+        return JSONResponse({'result': "Okay.. <br/>Rating: " + str(average)})
     else:
-        return JSONResponse({'result': prediction})
+         return JSONResponse({'result': "Keep it up! <br/>Rating: " + str(average)}) 
 
 
 if __name__ == '__main__':
