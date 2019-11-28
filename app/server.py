@@ -62,11 +62,16 @@ async def analyze(request):
     input_text= req['input-text']
 
     prediction = learn.predict(input_text)[0]
-    return JSONResponse({'result': str(prediction)})
     score=int(prediction)
     total_sum+=score
     num+=1
     average=total_sum/num
+    
+    if prediction == "negative":
+        return JSONResponse({'result': "That's not nice. <br/>Average is " + str(average)})
+    else:
+        return JSONResponse({'result': prediction})
+
 
 if __name__ == '__main__':
     if 'serve' in sys.argv:
